@@ -1,0 +1,34 @@
+"./Project Settings/Startup/kinetis_sysinit_c.obj"
+"./Sources/app/flash_driver/flash_FTFL_c.obj"
+"./Sources/app/wdt_kinetis_c.obj"
+"./Sources/app/vectors_c.obj"
+"./Sources/app/usb_descriptor_c.obj"
+"./Sources/app/sci_c.obj"
+"./Sources/app/printf_c.obj"
+"./Sources/app/main_kinetis_c.obj"
+"./Sources/app/disk_c.obj"
+"./Sources/app/RealTimerCounter_kinetis_c.obj"
+"./Sources/app/Loader_c.obj"
+"./Sources/app/FAT16_c.obj"
+"./Sources/app/Boot_loader_task_c.obj"
+"./Sources/class/usb_msc_scsi_c.obj"
+"./Sources/class/usb_msc_c.obj"
+"./Sources/class/usb_class_c.obj"
+"./Sources/driver/usb_framework_c.obj"
+"./Sources/driver/usb_driver_c.obj"
+"./Sources/driver/usb_dci_kinetis_c.obj"
+-proc cortex-m4
+-fp soft
+-little
+-msgstyle parseable
+-g3
+-thumb
+-interworking
+-lavender model=ewl ,print=int ,scan=int ,io=raw
+"$(ProjDirPath)/prm/MK60N512VMD100_flash.lcf"
+-main __thumb_startup
+-L"$(MCUToolsBaseDirEnv)/ARM_EABI_Support/ewl/lib"
+-map
+-map keep
+-srec
+-sreclength 252

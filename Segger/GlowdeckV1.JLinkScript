@@ -1,0 +1,5 @@
+﻿device mk20dx256xxx7
+unlock kinetis
+erase
+loadbin Glowdeck_V1.bin, 0x4000
+loadbin k20.bin, 0

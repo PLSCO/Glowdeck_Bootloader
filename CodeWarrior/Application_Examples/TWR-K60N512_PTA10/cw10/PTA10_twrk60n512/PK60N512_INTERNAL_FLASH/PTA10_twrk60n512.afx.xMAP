@@ -1,0 +1,101 @@
+
+
+
+# .interrupts
+#>0000C000          __vector_table (linker command file)
+  0000C000 00000000 .vectortable .vectortable	(kinetis_sysinit.obj)
+  0000C000 000001E0 .vectortable __vect_table	(kinetis_sysinit.obj)
+
+# .cfmprotect
+
+# .app_text
+  0000C410 00000106 .text   main	(main.obj)
+  0000C410 00000000 .text   $t	(main.obj)
+  0000C518 00000028 .text   pit0_isr	(main.obj)
+  0000C518 00000000 .text   $t	(main.obj)
+  0000C540 00000000 .text   $t	(kinetis_sysinit.obj)
+  0000C540 0000003C .text   __init_hardware	(kinetis_sysinit.obj)
+  0000C578 00000000 .text   $d	(kinetis_sysinit.obj)
+  0000C57C 00000002 .text   isr_default	(kinetis_sysinit.obj)
+  0000C57C 00000000 .text   $t	(kinetis_sysinit.obj)
+  0000C580 00000002 .text   isrINT_NMI	(kinetis_sysinit.obj)
+  0000C580 00000000 .text   $t	(kinetis_sysinit.obj)
+  0000C584 00000000 .text   $t	(libc_Thumb_LE_v7M.a abort_exit.o   )
+  0000C584 00000030 .text   exit	(libc_Thumb_LE_v7M.a abort_exit.o   )
+  0000C5B0 00000000 .text   $d	(libc_Thumb_LE_v7M.a abort_exit.o   )
+  0000C5B4 00000010 .text   memset	(libc_Thumb_LE_v7M.a mem.o          )
+  0000C5B4 00000000 .text   $t	(libc_Thumb_LE_v7M.a mem.o          )
+  0000C5C4 00000068 .text   __fill_mem	(libc_Thumb_LE_v7M.a mem_funcs.o    )
+  0000C5C4 00000000 .text   $t	(libc_Thumb_LE_v7M.a mem_funcs.o    )
+  0000C62C 00000000 .text   $t	(librt_Thumb_LE_v7M.a staticinitializ)
+  0000C62C 0000001E .text   __call_static_initializers	(librt_Thumb_LE_v7M.a staticinitializ)
+  0000C646 00000000 .text   $d	(librt_Thumb_LE_v7M.a staticinitializ)
+  0000C64C 00000000 .text   $t	(librt_Thumb_LE_v7M.a staticinitializ)
+  0000C64C 00000026 .text   __destroy_global_chain	(librt_Thumb_LE_v7M.a staticinitializ)
+  0000C66E 00000000 .text   $d	(librt_Thumb_LE_v7M.a staticinitializ)
+  0000C674 00000002 .text   __flush_cache	(librt_Thumb_LE_v7M.a romcopy.o      )
+  0000C674 00000000 .text   $t	(librt_Thumb_LE_v7M.a romcopy.o      )
+  0000C678 00000050 .text   __copy_rom_section	(librt_Thumb_LE_v7M.a romcopy.o      )
+  0000C678 00000000 .text   $t	(librt_Thumb_LE_v7M.a romcopy.o      )
+  0000C6C8 00000000 .text   $t	(librt_Thumb_LE_v7M.a romcopy.o      )
+  0000C6C8 0000003A .text   __copy_rom_sections_to_ram	(librt_Thumb_LE_v7M.a romcopy.o      )
+  0000C6FE 00000000 .text   $d	(librt_Thumb_LE_v7M.a romcopy.o      )
+  0000C704 00000000 .text   $t	(librt_Thumb_LE_v7M.a __arm_eabi_init)
+  0000C704 0000000C .text   _ExitProcess	(librt_Thumb_LE_v7M.a __arm_eabi_init)
+  0000C70C 00000000 .text   $d	(librt_Thumb_LE_v7M.a __arm_eabi_init)
+  0000C710 00000002 .text   __init_registers	(librt_Thumb_LE_v7M.a __arm_eabi_init)
+  0000C710 00000000 .text   $t	(librt_Thumb_LE_v7M.a __arm_eabi_init)
+  0000C714 00000002 .text   __init_user	(librt_Thumb_LE_v7M.a __arm_eabi_init)
+  0000C714 00000000 .text   $t	(librt_Thumb_LE_v7M.a __arm_eabi_init)
+  0000C718 00000000 .text   $t	(librt_Thumb_LE_v7M.a semihosted_cons)
+  0000C718 00000010 .text   sys_exit	(librt_Thumb_LE_v7M.a semihosted_cons)
+  0000C724 00000000 .text   $d	(librt_Thumb_LE_v7M.a semihosted_cons)
+  0000C728 00000000 .text   $t	(librt_Thumb_LE_v7M.a startup.o      )
+  0000C728 00000020 .text   zero_fill_bss	(librt_Thumb_LE_v7M.a startup.o      )
+  0000C73C 00000000 .text   $d	(librt_Thumb_LE_v7M.a startup.o      )
+  0000C748 00000000 .text   $t	(librt_Thumb_LE_v7M.a startup.o      )
+  0000C748 00000052 .text   __thumb_startup	(librt_Thumb_LE_v7M.a startup.o      )
+  0000C78E 00000000 .text   $d	(librt_Thumb_LE_v7M.a startup.o      )
+#>0000C7A0          ___ROM_AT (linker command file)
+
+# .app_data
+#>1FFF0400          __exception_table_start__ (linker command file)
+# Exception index
+  1FFF0400 00000000         Exception Table Index	()
+#>1FFF0400          __exception_table_end__ (linker command file)
+#>1FFF0400          __sinit__ (linker command file)
+# Linker generated symbols
+  1FFF0400 00000004         static initializer	(linker generated)
+
+# .bss
+#>1FFF0408          __START_BSS (linker command file)
+  1FFF0408 00000000 .bss    .bss	(libc_Thumb_LE_v7M.a abort_exit.o   )
+  1FFF0408 00000004 .bss    __stdio_exit	(libc_Thumb_LE_v7M.a abort_exit.o   )
+  1FFF040C 00000004 .bss    __atexit_curr_func_C	(libc_Thumb_LE_v7M.a abort_exit.o   )
+  1FFF0410 00000004 .bss    __console_exit	(libc_Thumb_LE_v7M.a abort_exit.o   )
+  1FFF0414 00000080 .bss    __atexit_funcs_C	(libc_Thumb_LE_v7M.a abort_exit.o   )
+  1FFF0494 00000004 .bss    __global_destructor_chain	(librt_Thumb_LE_v7M.a staticinitializ)
+  1FFF0494 00000000 .bss    .bss	(librt_Thumb_LE_v7M.a staticinitializ)
+  1FFF0498 00000000 .bss    .bss	(librt_Thumb_LE_v7M.a startup.o      )
+  1FFF0498 00000004 .bss    argv	(librt_Thumb_LE_v7M.a startup.o      )
+#>1FFF049C          __END_BSS (linker command file)
+#>0000C7A8          _romp_at (linker command file)
+
+# .romp
+#>0000C7A8          __S_romp (linker command file)
+#>1FFF84B8          __SP_INIT (linker command file)
+#>1FFF84B8          __heap_addr (linker command file)
+#>00008000          __heap_size (linker command file)
+
+
+# Memory map:
+  v_addr   p_addr   size     name
+  0000C000 0000C000 000001E0 .interrupts m_interrupts
+  0000C400 0000C400 00000000 .cfmprotect m_cfmprotrom
+  0000C410 0000C410 00000390 .app_text  m_text
+  1FFF0400 0000C7A0 00000008 .app_data  m_data
+  1FFF0408 1FFF0408 00000098 .bss       m_data
+  1FFF04A0 0000C7A8 00000018 .romp      m_data
+
+# Link start time: Fri Sep 23 01:44:05 2011
+# Link end time: Fri Sep 23 01:44:05 2011

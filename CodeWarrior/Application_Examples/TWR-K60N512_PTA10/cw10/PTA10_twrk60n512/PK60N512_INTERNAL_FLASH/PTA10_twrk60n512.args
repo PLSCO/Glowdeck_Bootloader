@@ -1,0 +1,1 @@
+-proc cortex-m4 -little -msgstyle parseable -g3 -thumb -interworking -lavender model=ewl ,print=int ,scan=int ,io=raw "$(ProjDirPath)/Project_Settings/Linker_Files/PK60N512_flash.lcf" -main __thumb_startup -L"$(MCUToolsBaseDirEnv)/ARM_EABI_Support/ewl/lib" -map -map keep -srec -sreclength 40  "./Sources/main.obj" "./Startup_Code/kinetis_sysinit.obj"
