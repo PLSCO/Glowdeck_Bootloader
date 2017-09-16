@@ -22,6 +22,10 @@
 extern void TestApp_Init(void);
 extern void TestApp_Task(void);
 
+#ifdef BLUETOOTH_UART1
+#include "bluetooth.h"
+#endif
+
 //#if (defined MCU_MK20D7) || (defined MCU_MK40D7)
 //	#define MCGOUTCLK_72_MHZ
 //#endif
@@ -192,6 +196,10 @@ volatile uint_8 kbi_stat;	   /* Status of the Key Pressed */
 	extern uint_32 feedback_data;
 #endif
 
+	// used to reset the device after completing the bootloader flashing
+	int ALLDONE = 0;
+	uint32_t ALLDONECOUNT = 0;
+
 /*****************************************************************************
  * Global Functions
  *****************************************************************************/
@@ -225,10 +233,33 @@ volatile uint_8 kbi_stat;	   /* Status of the Key Pressed */
 	 
 	 
     Init_Sys();
-    pixel(1);
+    
+#ifdef BLUETOOTH_UART1
+    bluetooth_init();
+#endif
+    
+    
+    // test out the pixels
+ /* 
+    // returns true when (Wait) milliseconds have gone by. can't be used to time more than 89 seconds.	
+    #define F_CPU 48000000	// one cycle is .02 uSec
+	#define MILLISEC ((F_CPU/4)/1000)
+	#define SLEEPEXPIRED(timer,wait) (DWT_CYCCNT - (timer) >= (wait)*MILLISEC)
+    // needed after each expiration of the timer
+    #define RESETTIMER(timer) timer = DWT_CYCCNT
 
-
-
+    uint32_t testtimer;
+    int i,j;
+   
+   
+    for (j=0; j< 100; j++)
+    for (i=0; i<5; i++) {
+		while (!SLEEPEXPIRED(testtimer,200)); 
+		RESETTIMER(testtimer);
+		pixel(2,j,100);
+    }
+*/
+    pixel(1,0,0);
 
     /* SIM Configuration */
    // GPIO_Init();
@@ -243,6 +274,21 @@ volatile uint_8 kbi_stat;	   /* Status of the Key Pressed */
     	Watchdog_Reset();
        /* Call the application task */
        TestApp_Task();
+       
+#ifdef BLUETOOTH_UART1
+       bluetooth_task();
+#endif
+       
+		if(ALLDONE==1){
+			ALLDONECOUNT++;
+			if(ALLDONECOUNT>1100000ul) { //about 3 seconds before auto disconnect
+				pixel(0,0,0);
+				#define CPU_RESTART_ADDR (uint32_t *)0xE000ED0C
+				#define CPU_RESTART_VAL 0x5FA0004
+				#define CPU_RESTART (*CPU_RESTART_ADDR = CPU_RESTART_VAL);
+				CPU_RESTART;
+			}		
+		}
     }
 
 #ifdef __GNUC__
@@ -677,8 +723,10 @@ void fb_clk_init(void)
 	/* Enable the clock to the FlexBus module */
 	SIM_SCGC7 |= SIM_SCGC7_FLEXBUS_MASK;
 
+#ifndef BLUETOOTH_UART1 // Bluetooth uses this pin...
 	/* Enable the FB_CLKOUT function on PTC3 (alt5 function) */
 	PORTC_PCR3 = ( PORT_PCR_MUX(0x5));
+#endif
 }
 #endif // MCU_MK70F12
 

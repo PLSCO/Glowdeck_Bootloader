@@ -1,4 +1,4 @@
-Sources/app/Loader_c.obj: C:\Sites\Glowdeck\aaastuff\USB_MSD_Device_bootloader_v1.0\Source\Device\app\msd_bootloader\Loader.c \
+Sources/app/Loader_c.obj: C:\text\projects\glowdeck\USB_MSD_Device_bootloader_v1.0\USB_MSD_Device_bootloader_v1.0\Source\Device\app\msd_bootloader\Loader.c \
 	C:\Freescale\CW\ MCU\ v10.6\MCU\ARM_EABI_Support\ewl\EWL_C\include\lib_ewl.prefix \
 	C:\Freescale\CW\ MCU\ v10.6\MCU\ARM_EABI_Support\ewl\EWL_C\include\common.prefix \
 	C:\Freescale\CW\ MCU\ v10.6\MCU\ARM_EABI_Support\ewl\EWL_C\include\ewl_c_version.h \
@@ -25,12 +25,12 @@ Sources/app/Loader_c.obj: C:\Sites\Glowdeck\aaastuff\USB_MSD_Device_bootloader_v
 	C:\Freescale\CW\ MCU\ v10.6\MCU\ARM_EABI_Support\ewl\EWL_C\include\va_list.h \
 	C:\Freescale\CW\ MCU\ v10.6\MCU\ARM_EABI_Support\ewl\EWL_C\include\file_struc.h \
 	C:\Freescale\CW\ MCU\ v10.6\MCU\ARM_EABI_Support\ewl\EWL_C\include\stdio_api.h \
-	C:\Sites\Glowdeck\aaastuff\USB_MSD_Device_bootloader_v1.0\Source\Device\app\common\types.h \
-	C:\Sites\Glowdeck\aaastuff\USB_MSD_Device_bootloader_v1.0\Source\Device\app\msd_bootloader\Bootloader.h \
-	C:\Sites\Glowdeck\aaastuff\USB_MSD_Device_bootloader_v1.0\Source\Device\app\msd_bootloader\cw10\kinetis_k20d7\derivative.h \
-	C:\Sites\Glowdeck\aaastuff\USB_MSD_Device_bootloader_v1.0\Source\Device\app\common\kinetis\MK20D7.h \
+	C:\text\projects\glowdeck\USB_MSD_Device_bootloader_v1.0\USB_MSD_Device_bootloader_v1.0\Source\Device\app\common\types.h \
+	C:\text\projects\glowdeck\USB_MSD_Device_bootloader_v1.0\USB_MSD_Device_bootloader_v1.0\Source\Device\app\msd_bootloader\Bootloader.h \
+	C:\text\projects\glowdeck\USB_MSD_Device_bootloader_v1.0\USB_MSD_Device_bootloader_v1.0\Source\Device\app\msd_bootloader\cw10\kinetis_k20d7\derivative.h \
+	C:\text\projects\glowdeck\USB_MSD_Device_bootloader_v1.0\USB_MSD_Device_bootloader_v1.0\Source\Device\app\common\kinetis\MK20D7.h \
 	C:\Freescale\CW\ MCU\ v10.6\MCU\ARM_EABI_Support\ewl\EWL_C\include\stdint.h \
 	C:\Freescale\CW\ MCU\ v10.6\MCU\ARM_EABI_Support\ewl\EWL_C\include\cstdint \
 	C:\Freescale\CW\ MCU\ v10.6\MCU\ARM_EABI_Support\ewl\EWL_C\include\limits_api.h \
-	C:\Sites\Glowdeck\aaastuff\USB_MSD_Device_bootloader_v1.0\Source\Device\app\msd_bootloader\flash_driver\flash_FTFL.h \
-	C:\Sites\Glowdeck\aaastuff\USB_MSD_Device_bootloader_v1.0\Source\Device\app\common\kinetis\hidef.h 
+	C:\text\projects\glowdeck\USB_MSD_Device_bootloader_v1.0\USB_MSD_Device_bootloader_v1.0\Source\Device\app\msd_bootloader\flash_driver\flash_FTFL.h \
+	C:\text\projects\glowdeck\USB_MSD_Device_bootloader_v1.0\USB_MSD_Device_bootloader_v1.0\Source\Device\app\common\kinetis\hidef.h 

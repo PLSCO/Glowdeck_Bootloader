@@ -22,7 +22,7 @@
 				</extensions>
 			</storageModule>
 			<storageModule moduleId="cdtBuildSystem" version="4.0.0">
-				<configuration artifactExtension="afx" artifactName="kinetis_k20" buildProperties="" cleanCommand="${system:ECLIPSE_HOME}/../gnu/bin/rm -f" description="" errorParsers="com.freescale.core.ide.cdt.errorParsers.GCCErrorParser;org.eclipse.cdt.core.GLDErrorParser;org.eclipse.cdt.core.GASErrorParser;com.freescale.core.ide.cdt.errorParsers.LnkErrorParser;com.freescale.core.ide.cdt.errorParsers.AsmErrorParser;com.freescale.core.ide.cdt.errorParsers.CobjErrorParser;com.freescale.core.ide.cdt.errorParsers.IcodeErrorParser;com.freescale.core.ide.cdt.errorParsers.LltErrorParser;com.freescale.core.ide.cdt.errorParsers.MwfeErrorParser;org.eclipse.cdt.core.GmakeErrorParser" id="com.freescale.arm.cdt.toolchain.config.arm.release.453378756" isPrebuildInvalidatingBuild="false" name="MK20D7_INTERNAL_FLASH" parent="com.freescale.arm.cdt.toolchain.config.arm.release" postannouncebuildStep="" postbuildStep="" preannouncebuildStep="" prebuildStep="">
+				<configuration artifactExtension="afx" artifactName="kinetis_k20" buildProperties="" buildReferences="true" buildReferencingConfigurations="false" cleanCommand="${system:ECLIPSE_HOME}/../gnu/bin/rm -f" description="" errorParsers="com.freescale.core.ide.cdt.errorParsers.GCCErrorParser;org.eclipse.cdt.core.GLDErrorParser;org.eclipse.cdt.core.GASErrorParser;com.freescale.core.ide.cdt.errorParsers.LnkErrorParser;com.freescale.core.ide.cdt.errorParsers.AsmErrorParser;com.freescale.core.ide.cdt.errorParsers.CobjErrorParser;com.freescale.core.ide.cdt.errorParsers.IcodeErrorParser;com.freescale.core.ide.cdt.errorParsers.LltErrorParser;com.freescale.core.ide.cdt.errorParsers.MwfeErrorParser;org.eclipse.cdt.core.GmakeErrorParser" id="com.freescale.arm.cdt.toolchain.config.arm.release.453378756" isPrebuildInvalidatingBuild="false" isVersionInfoProjSpecific="false" name="MK20D7_INTERNAL_FLASH" parent="com.freescale.arm.cdt.toolchain.config.arm.release" postannouncebuildStep="" postbuildStep="" preannouncebuildStep="" prebuildStep="" produceBuildErrorsWithMissingReferences="true">
 					<folderInfo id="com.freescale.arm.cdt.toolchain.config.arm.release.453378756." name="/" resourcePath="">
 						<toolChain errorParsers="" id="com.freescale.arm.cdt.toolchain.arm.release.500840588" name="ARM Toolchain" superClass="com.freescale.arm.cdt.toolchain.arm.release">
 							<targetPlatform binaryParser="org.eclipse.cdt.core.ELF" id="com.freescale.arm.cdt.toolchain.targetplatform.2014476290" isAbstract="false" name="ARM Target Platform" superClass="com.freescale.arm.cdt.toolchain.targetplatform"/>
@@ -34,7 +34,7 @@
 								<option id="com.freescale.arm.cdt.toolchain.linker.commandFile.2108268101" name="Linker Command File" superClass="com.freescale.arm.cdt.toolchain.linker.commandFile" value="${ProjDirPath}/prm/MK20DX256_flash.lcf" valueType="string"/>
 								<option id="com.freescale.arm.cdt.toolchain.linker.generateMapFile.1521514527" name="Generate Link Map" superClass="com.freescale.arm.cdt.toolchain.linker.generateMapFile" value="true" valueType="boolean"/>
 								<option id="com.freescale.arm.cdt.toolchain.linker.generateSRecord.154686084" name="Generate S-Record File" superClass="com.freescale.arm.cdt.toolchain.linker.generateSRecord" value="true" valueType="boolean"/>
-								<option id="com.freescale.arm.cdt.toolchain.option.linkorder.61584016" superClass="com.freescale.arm.cdt.toolchain.option.linkorder" valueType="stringList">
+								<option id="com.freescale.arm.cdt.toolchain.option.linkorder.61584016" name="Link Order" superClass="com.freescale.arm.cdt.toolchain.option.linkorder" valueType="stringList">
 									<listOptionValue builtIn="false" value="Project Settings/Startup/kinetis_sysinit.c"/>
 									<listOptionValue builtIn="false" value="Sources/app/Boot_loader_task.c"/>
 									<listOptionValue builtIn="false" value="Sources/app/FAT16.c"/>
@@ -77,6 +77,11 @@
 								<option id="com.freescale.arm.cdt.toolchain.armCpp.input.define.1678433222" name="Defined Macros" superClass="com.freescale.arm.cdt.toolchain.armCpp.input.define" valueType="definedSymbols">
 									<listOptionValue builtIn="false" value="LITTLE_ENDIAN"/>
 								</option>
+								<option id="com.freescale.arm.cdt.toolchain.armCpp.optimization.mode.361519426" name="Speed vs. Size" superClass="com.freescale.arm.cdt.toolchain.armCpp.optimization.mode" value="com.freescale.arm.cdt.toolchain.armCpp.optimization.mode.space" valueType="enumerated"/>
+								<option id="com.freescale.arm.cdt.toolchain.armCpp.optimization.level.2023978902" name="Optimization Level" superClass="com.freescale.arm.cdt.toolchain.armCpp.optimization.level" value="com.freescale.arm.cdt.toolchain.armCpp.optimization.level.level0" valueType="enumerated"/>
+								<option id="com.freescale.arm.cdt.toolchain.armCpp.warn.warningsFlag.hidden.adjusted.976199485.adjusted.1156127002" name="(hidden) warnings flag" superClass="com.freescale.arm.cdt.toolchain.armCpp.warn.warningsFlag.hidden.adjusted.976199485" value="false" valueType="boolean"/>
+								<option id="com.freescale.arm.cdt.toolchain.armCpp.warn.enableWarnings.hidden.adjusted.1313383318.adjusted.1355874901" name="(hidden) toggle warnings flag" superClass="com.freescale.arm.cdt.toolchain.armCpp.warn.enableWarnings.hidden.adjusted.1313383318" value="com.freescale.arm.cdt.toolchain.enableWarnings.custom.hidden" valueType="enumerated"/>
+								<option id="com.freescale.arm.cdt.toolchain.armCpp.optimization.inlineLevel.1045067697" name="Inlining" superClass="com.freescale.arm.cdt.toolchain.armCpp.optimization.inlineLevel" value="com.freescale.arm.cdt.toolchain.armCpp.optimization.inlineLevel.smart" valueType="enumerated"/>
 								<inputType id="com.freescale.arm.cdt.toolchain.armCpp.cSource.437740046" name="ARM C/C++ Compiler" superClass="com.freescale.arm.cdt.toolchain.armCpp.cSource"/>
 							</tool>
 							<tool command="&quot;${ARM_ToolsDir}/mwasmarm&quot;" commandLinePattern="${COMMAND} ${FLAGS} ${OUTPUT_FLAG} ${OUTPUT_PREFIX}${OUTPUT} ${INPUTS}" errorParsers="" id="com.freescale.arm.cdt.toolchain.assembler.782554678" name="ARM Assembler" superClass="com.freescale.arm.cdt.toolchain.assembler">
@@ -285,5 +290,10 @@
 				</scannerInfoProvider>
 			</profile>
 		</scannerConfigBuildInfo>
+	</storageModule>
+	<storageModule moduleId="refreshScope" versionNumber="2">
+		<configuration configurationName="MK20D7_INTERNAL_FLASH">
+			<resource resourceType="PROJECT" workspacePath="/kinetis_k20d7"/>
+		</configuration>
 	</storageModule>
 </cproject>

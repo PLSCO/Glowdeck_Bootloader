@@ -44,7 +44,7 @@ uint_8 line[260];           /* line buffer */
 * Function Name  : FlashApplication
 * Returned Value : 0 if successful, other value if error
 * Comments       : parse and flash an array to flash memory
-*     
+*     			array should be divisible by four in length and padded if content less than divisible by four
 *END*--------------------------------------------------------------------*/
 uint_8 FlashApplication
     (
@@ -115,14 +115,16 @@ uint_8 FlashApplication
             EnableInterrupts;
             bytes_written += length;
             break;
+     /*  commented out to save space     
         case CODE_WARRIOR_BINARY:
-            /* CodeWarrior binary file found */
-            result = FlashArrayCW(arr,length,line);  /* DES parse and flash array */
+            // CodeWarrior binary file found
+            result = FlashArrayCW(arr,length,line);  // DES parse and flash array
             break;
         case S19_RECORD:
-            /* S19 file found */
-            result = FlashArrayS19(arr,length,line);    /* DES parse and flash array */
+            // S19 file found 
+            result = FlashArrayS19(arr,length,line); // DES parse and flash array
             break;
+       */
     } /* EndSwitch */
     /* DES Should add programming verification code ...minimal code
     to see if "#Flash Programming Signature" present from linker script */
@@ -218,7 +220,7 @@ static uint_8 FlashLineS19
     if (c_temp!='S')
     {
         BootloaderStatus = BootloaderS19Error;
-        return FLASH_IMAGE_ERROR;
+        return FLASH_IMAGE_ERROR_S19_NOHEADER;
     } /* EndIf */
     /* Get record length */
     cur_point = 2;
@@ -227,7 +229,7 @@ static uint_8 FlashLineS19
     {
         /* not a valid S19 file */
         BootloaderStatus = BootloaderS19Error;
-        return FLASH_IMAGE_ERROR;
+        return FLASH_IMAGE_ERROR_S19_FILE_INCOMPLETE;
     } /* EndIf */
     cur_point--;
     checksum = length;
@@ -251,7 +253,7 @@ static uint_8 FlashLineS19
                     {       
                         /* not a valid S19 file */
                         BootloaderStatus = BootloaderS19Error;
-                        return FLASH_IMAGE_ERROR;
+                        return FLASH_IMAGE_ERROR_S19_FILE_ENDED_EARLY;
                     } /* EndIf */
                     S19Address = (S19Address << 8) | data;
                     /* Maintain 8-bit checksum */
@@ -281,7 +283,7 @@ static uint_8 FlashLineS19
                         {
                             /* not a valid S19 file */
                             BootloaderStatus = BootloaderS19Error;
-                            return FLASH_IMAGE_ERROR;
+                            return FLASH_IMAGE_ERROR_S19_FILE_ENDED_EARLY;
                         } /* EndIf */
                     } /* EndFor */
 
@@ -297,14 +299,14 @@ static uint_8 FlashLineS19
                     {
                         /* not a valid S19 file */
                         BootloaderStatus = BootloaderS19Error;
-                        return FLASH_IMAGE_ERROR;
+                        return FLASH_IMAGE_ERROR_S19_FILE_ENDED_EARLY;
                     } /* EndIf */
 
                     if (((data - ~checksum) & 0x00FF) != 0)
                     {
                         BootloaderStatus = BootloaderS19Error;
                         S19FileDone = TRUE;
-                        return FLASH_IMAGE_ERROR;
+                        return FLASH_IMAGE_ERROR_S19_CHECKSUM_ERROR;
                     } /* EndIf */
                     /* For 32-bit cores Flash_Prog writes 32-bit words, not bytes */
                     /* if last 32-bit word in s-record is not complete, finish word */
@@ -332,14 +334,14 @@ static uint_8 FlashLineS19
                         if(Flash_OK  != temp)
                         {
                             BootloaderStatus = BootloaderFlashError;
-                            return FLASH_IMAGE_ERROR;
+                            return FLASH_IMAGE_ERROR_S19_FLASH_OK_FAIL;
                         } /* EndIf */
                     } /* EndIf */
                 }
                 else    /* S-Record points to invalid address */
                 {
                     BootloaderStatus = BootloaderS19Error;
-                    return FLASH_IMAGE_ERROR;
+                    return FLASH_IMAGE_ERROR_S19_INVALID_ADDRESS;
                 } /* EndIf */
                 break;
             case '7':
@@ -360,7 +362,7 @@ static uint_8 FlashLineS19
                         {
                             /* not a valid S19 file */
                             BootloaderStatus = BootloaderS19Error;
-                            return FLASH_IMAGE_ERROR;
+                            return FLASH_IMAGE_ERROR_S19_FILE_ENDED_EARLY;
                         } /* EndIf */
                         checksum = (unsigned char)((data + checksum) & 0x00FF);
                         cur_point+=2;
@@ -372,7 +374,7 @@ static uint_8 FlashLineS19
                     {
                         /* not a valid S19 file */
                         BootloaderStatus = BootloaderS19Error;
-                        return FLASH_IMAGE_ERROR;
+                        return FLASH_IMAGE_ERROR_S19_FILE_ENDED_EARLY;
                     } /* EndIf */
                     
                     /* Check checksum */
@@ -380,7 +382,7 @@ static uint_8 FlashLineS19
                     {
                         BootloaderStatus = BootloaderS19Error;
                         S19FileDone = TRUE;
-                        return FLASH_IMAGE_ERROR;
+                        return FLASH_IMAGE_ERROR_S19_CHECKSUM_ERROR;
                     }
                     else 
                     {
@@ -591,10 +593,10 @@ static uint_8 FlashLineCW
         DisableInterrupts;
 #if (!defined __MK_xxx_H__)
         if (Flash_ByteProgram((uint_32*)(write_addr),(uint_32 *)(Line + 8),data_length))
-            result = FLASH_IMAGE_ERROR;
+            result = FLASH_IMAGE_ERROR_BAD_PROGRAM;
 #else
         if (Flash_ByteProgram(write_addr,(uint_32 *)(Line + 8),data_length))
-            result = FLASH_IMAGE_ERROR;
+            result = FLASH_IMAGE_ERROR_BAD_PROGRAM;
 #endif
         EnableInterrupts;
     } /* EndIf */

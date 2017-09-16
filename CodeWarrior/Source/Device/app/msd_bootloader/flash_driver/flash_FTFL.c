@@ -132,7 +132,7 @@ unsigned char Flash_SectorErase(uint_32 FlashPtr)
  *
  * Returns:         Error Code
  *
- * Notes:
+ * Notes:			DataSrc must be in 4 byte increments. But number of bytes doesn't have to be... but last bytes will be zero if less than divisible by four
  *
  *******************************************************************************/
 unsigned char Flash_ByteProgram(uint_32 FlashStartAdd,uint_32 *DataSrcPtr,uint_32 NumberOfBytes)

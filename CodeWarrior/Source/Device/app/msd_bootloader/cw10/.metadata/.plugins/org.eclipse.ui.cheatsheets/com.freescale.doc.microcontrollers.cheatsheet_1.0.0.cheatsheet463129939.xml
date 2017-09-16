@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<compositeCheatSheetState id="com.freescale.doc.microcontrollers.cheatsheet_1.0.0.cheatsheet463129939">
+<task id="TaskId_0" state="1"/>
+<task id="TaskId_1" state="1">
+<taskData buttonstate="0" id="TaskId_1" item="4">
+<completed item="0"/>
+<completed item="1"/>
+<completed item="2"/>
+<completed item="3"/>
+<expanded item="4"/>
+<expanded item="5"/>
+</taskData>
+</task>
+<task id="TaskId_2" state="1">
+<taskData buttonstate="0" id="TaskId_2" item="1">
+<completed item="0"/>
+<expanded item="1"/>
+<expanded item="2"/>
+<expanded item="3"/>
+<expanded item="4"/>
+</taskData>
+</task>
+<layout key="selectedTask" value="TaskId_2"/>
+</compositeCheatSheetState>

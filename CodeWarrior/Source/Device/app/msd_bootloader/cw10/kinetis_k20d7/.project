@@ -138,6 +138,11 @@
 			<locationURI>app/msd_bootloader/FAT16.h</locationURI>
 		</link>
 		<link>
+			<name>Headers/app/bluetooth.h</name>
+			<type>1</type>
+			<location>C:/text/projects/glowdeck/USB_MSD_Device_bootloader_v1.0/USB_MSD_Device_bootloader_v1.0/Source/Device/app/msd_bootloader/bluetooth.h</location>
+		</link>
+		<link>
 			<name>Headers/app/derivative.h</name>
 			<type>1</type>
 			<locationURI>app/msd_bootloader/cw10/kinetis_k20d7/derivative.h</locationURI>
@@ -233,6 +238,11 @@
 			<locationURI>app/common/kinetis/RealTimerCounter_kinetis.c</locationURI>
 		</link>
 		<link>
+			<name>Sources/app/bluetooth.c</name>
+			<type>1</type>
+			<location>C:/text/projects/glowdeck/USB_MSD_Device_bootloader_v1.0/USB_MSD_Device_bootloader_v1.0/Source/Device/app/msd_bootloader/bluetooth.c</location>
+		</link>
+		<link>
 			<name>Sources/app/disk.c</name>
 			<type>1</type>
 			<locationURI>app/msd_bootloader/disk.c</locationURI>
@@ -256,6 +266,11 @@
 			<name>Sources/app/sci.c</name>
 			<type>1</type>
 			<locationURI>app/common/kinetis/sci.c</locationURI>
+		</link>
+		<link>
+			<name>Sources/app/serial_kinetis.c</name>
+			<type>1</type>
+			<location>C:/text/projects/glowdeck/USB_MSD_Device_bootloader_v1.0/USB_MSD_Device_bootloader_v1.0/Source/Device/app/common/serial/serial_kinetis.c</location>
 		</link>
 		<link>
 			<name>Sources/app/usb_descriptor.c</name>

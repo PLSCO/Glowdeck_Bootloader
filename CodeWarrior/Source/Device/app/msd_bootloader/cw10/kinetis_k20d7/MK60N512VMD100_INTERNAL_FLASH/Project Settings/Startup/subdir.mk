@@ -30,7 +30,7 @@ OBJS_OS_FORMAT += \
 # Each subdirectory must supply rules for building sources it contributes
 Project\ Settings/Startup/kinetis_sysinit_c.obj: $(APP)/common/kinetis/kinetis_sysinit.c
 	@echo 'Building file: $<'
-	@echo 'Executing target #19 $<'
+	@echo 'Executing target #21 $<'
 	@echo 'Invoking: ARM Compiler'
 	"$(ARM_ToolsDirEnv)/mwccarm" -gccinc @@"Project Settings/Startup/kinetis_sysinit.args" -o "Project Settings/Startup/kinetis_sysinit_c.obj" -c "$<" -MD -gccdep
 	@echo 'Finished building: $<'

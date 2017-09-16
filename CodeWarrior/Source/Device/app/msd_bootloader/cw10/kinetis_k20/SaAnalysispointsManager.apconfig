@@ -1,6 +1,6 @@
 <Analysispoints>
 	<Name>AnalysispointsManager</Name>
-	<ProjectPath>C:/Sites/Glowdeck/aaastuff/USB_MSD_Device_bootloader_v1.0/Source/Device/app/msd_bootloader/cw10/kinetis_k60/SaAnalysispointsManager.apconfig</ProjectPath>
+	<ProjectPath>C:/text/projects/glowdeck/USB_MSD_Device_bootloader_v1.0/USB_MSD_Device_bootloader_v1.0/Source/Device/app/msd_bootloader/cw10/kinetis_k20/SaAnalysispointsManager.apconfig</ProjectPath>
 	<MaxNumberOfCores>1</MaxNumberOfCores>
 	<Comments>Analysispoints Manager</Comments>
 	<IgnoreAll>false</IgnoreAll>

@@ -4,11 +4,11 @@
 # a _ESCAPE version of the macro is added that escapes the space with backslash (\).
 ################################################################################
 
-export SOURCE=C:/Sites/Glowdeck/aaastuff/USB_MSD_Device_bootloader_v1.0/Source/Device/source
-export APP=C:/Sites/Glowdeck/aaastuff/USB_MSD_Device_bootloader_v1.0/Source/Device/app
+export SOURCE=C:/text/projects/glowdeck/USB_MSD_Device_bootloader_v1.0/USB_MSD_Device_bootloader_v1.0/Source/Device/source
+export APP=C:/text/projects/glowdeck/USB_MSD_Device_bootloader_v1.0/USB_MSD_Device_bootloader_v1.0/Source/Device/app
 export GNU_Make_Install_DirEnv=$(CWInstallLocationEnv)/gnu/bin
-export ProjDirPath=C:/Sites/Glowdeck/aaastuff/USB_MSD_Device_bootloader_v1.0/Source/Device/app/msd_bootloader/cw10/kinetis_k20d7
+export ProjDirPath=C:/text/projects/glowdeck/USB_MSD_Device_bootloader_v1.0/USB_MSD_Device_bootloader_v1.0/Source/Device/app/msd_bootloader/cw10/kinetis_k20d7
 export CWInstallLocationEnv=C:/Freescale/CW MCU v10.6
 export MCUToolsBaseDirEnv=$(CWInstallLocationEnv)/MCU
-export KINETIS=C:/Sites/Glowdeck/aaastuff/USB_MSD_Device_bootloader_v1.0/Source/Device/source/driver/kinetis
+export KINETIS=C:/text/projects/glowdeck/USB_MSD_Device_bootloader_v1.0/USB_MSD_Device_bootloader_v1.0/Source/Device/source/driver/kinetis
 export ARM_ToolsDirEnv=$(CWInstallLocationEnv)/MCU/ARM_Tools/Command_Line_Tools

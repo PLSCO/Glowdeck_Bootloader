@@ -67,6 +67,8 @@
 **************************************************************************/
 extern uint_8                       filetype;      /* image file type */     
 static uint_32                      New_sp,New_pc; /* stack pointer and program counter */
+boolean								active_file = FALSE;
+
 /**************************************************************************
    Funciton prototypes
 **************************************************************************/
@@ -145,66 +147,91 @@ void eeprom_write_byte(uint8_t *addr, uint8_t value)
 #define sei() __enable_irq()
 #define cli() __disable_irq()
 
-void pixel(uint8_t mode){
+// sets the WS2812 pixels
+// takes about 45 mSec to complete during which interrupts are turned off
 
+// at 9600 baud and a serial port (UART1) with a one-byte buffer, each byte must be serviced within 1 mSec, so this can't be run while you're allowing serial port access.
 
+#define GREEN 0
+#define RED 1
+#define BLUE 2
+#define NUMLEDS 56
+#define LENGTHOFDROP 8
+#define F_CPU 48000000							// one cycle is .25 uSec
+#define CYCLES_800_T0H  (F_CPU / 4000000)		// 0 is 12 cycles long (3 uSec)
+#define CYCLES_800_T1H  (F_CPU / 1200000)		// 1 is 40 cycles long (10 uSec)
+#define CYCLES_800      (F_CPU / 800000)		// reset is 90 cycles long (22.5 uSec)
+#define setPin GPIOC_PSOR  = (1 << 2);
+#define clearPin GPIOC_PCOR  = (1 << 2);
+
+void pixel(uint8_t mode,uint32_t part,uint32_t full)
+{
 	uint8_t pinmask;
 	uint8_t mask;
 
-  cli();
-	#define F_CPU 48000000
-	#define CYCLES_800_T0H  (F_CPU / 4000000)
-	#define CYCLES_800_T1H  (F_CPU / 1200000)
-	#define CYCLES_800      (F_CPU / 800000)
-    #define setPin GPIOC_PSOR  = (1 << 2);
-	#define clearPin GPIOC_PCOR  = (1 << 2);
+	uint8_t numwhite=0; 			
+	static uint8_t dropletstart = LENGTHOFDROP; 
+	uint8_t droplet = dropletstart;
 	uint32_t cyc;
+    uint8_t i=0;
+    uint8_t end=0;
+    uint32_t fulllocal;
+
+	if (part && full) numwhite  = (part * NUMLEDS) / full; // this depends on the multiplication happening first so as to not need floats
+	fulllocal = full;
+	
 	ARM_DEMCR |= ARM_DEMCR_TRCENA;
-	ARM_DWT_CTRL |= ARM_DWT_CTRL_CYCCNTENA;
-        cyc = ARM_DWT_CYCCNT + CYCLES_800;
-        uint8_t i=0;
-        uint8_t end=0;
-        while(i<56){
-        	uint8_t end = 0;
-          while (end < 3) {
-        	  if(end==1 && mode!=0)
-            pinmask = 255;
-        	  else
-        		  pinmask = 0;
+	ARM_DWT_CTRL |= ARM_DWT_CTRL_CYCCNTENA;			// this enables the Debug unit's cycle counter
+	cyc = ARM_DWT_CYCCNT + CYCLES_800;
 
-
-            
-            for (mask = 0x80; mask; mask >>= 1) {
+	cli();											// disable interrupt processing
+	while(i<NUMLEDS) {
+		uint8_t end = 0;
+		while (end < 3) {
+			if(numwhite) {				// filled section is all white  
+				pinmask = 90;	// turning the brightness of the white down mostly for power savings
+			} else if (end==BLUE && mode==2) {
+				switch (droplet) {
+					case LENGTHOFDROP: pinmask = 255; break;
+					case (LENGTHOFDROP-1): pinmask = 150; break;
+					case (LENGTHOFDROP-2): pinmask = 75; break;
+					case (LENGTHOFDROP-3): pinmask = 30; break;
+					default: pinmask = 0; break;        			
+				}
+				if (!(--droplet)) droplet = LENGTHOFDROP;       		
+			} else if (end==BLUE && mode==1) {			// normal blue on mode
+				pinmask = 255;
+			} else if (end==RED  && mode==3 && (fulllocal & 0x00000001)) { 			// error in flashing turns LEDs RED, with the first 8 bits being the error code
+				pinmask = 70;
+			} else {
+				pinmask = 0;
+			}
+		
+			for (mask = 0x80; mask; mask >>= 1) {
 				  if (pinmask & mask) {
-						  while (ARM_DWT_CYCCNT - cyc < CYCLES_800) ;
+						  while (ARM_DWT_CYCCNT - cyc < CYCLES_800) ;     // 22.5 usec low (plus overhead)
 						  cyc = ARM_DWT_CYCCNT;
 						  setPin;
-						  while (ARM_DWT_CYCCNT - cyc < CYCLES_800_T1H) ;
+						  while (ARM_DWT_CYCCNT - cyc < CYCLES_800_T1H) ; // 10 uSec high
 						  clearPin;
 				  } else {
-						  while (ARM_DWT_CYCCNT - cyc < CYCLES_800) ;
+						  while (ARM_DWT_CYCCNT - cyc < CYCLES_800) ;     // 22.5 uSec low
 						  cyc = ARM_DWT_CYCCNT;
 						  setPin;
-						  while (ARM_DWT_CYCCNT - cyc < CYCLES_800_T0H) ;
+						  while (ARM_DWT_CYCCNT - cyc < CYCLES_800_T0H) ; // 3 uSec high
 						  clearPin;
 				  }
-			  }
-			  end++;
-          }
-          i++;
-        }
-        while (ARM_DWT_CYCCNT - cyc < CYCLES_800) ;
+			}
+			end++;
+		}
+		i++;
+		if (numwhite) numwhite--;
+		if (mode == 3) fulllocal = (fulllocal >> 1) | 0x80000000; // fills full with 1s so the tail end is bright.
+	}
+	while (ARM_DWT_CYCCNT - cyc < CYCLES_800) ;
+	sei();              // Re-enable interrupts
 
-        
-        sei();              // Re-enable interrupts
-        if(mode==0){
-			#define CPU_RESTART_ADDR (uint32_t *)0xE000ED0C
-			#define CPU_RESTART_VAL 0x5FA0004
-			#define CPU_RESTART (*CPU_RESTART_ADDR = CPU_RESTART_VAL);
-        	CPU_RESTART;
-        }
-
-
+	if (mode==2) { dropletstart--; if (!dropletstart) dropletstart = LENGTHOFDROP; }
 }
 
 
@@ -269,7 +296,6 @@ void GPIO_Bootloader_Init()
 #endif
 //TODO select what pin will be used in openmote k20 and configure it 
     
-
 } /* EndBody */
 
 /*FUNCTION*----------------------------------------------------------------

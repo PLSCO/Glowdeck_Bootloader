@@ -30,7 +30,7 @@ OBJS_OS_FORMAT += \
 # Each subdirectory must supply rules for building sources it contributes
 Sources/app/flash_driver/flash_FTFL_c.obj: $(APP)/msd_bootloader/flash_driver/flash_FTFL.c
 	@echo 'Building file: $<'
-	@echo 'Executing target #18 $<'
+	@echo 'Executing target #20 $<'
 	@echo 'Invoking: ARM Compiler'
 	"$(ARM_ToolsDirEnv)/mwccarm" -gccinc @@"Sources/app/flash_driver/flash_FTFL.args" -o "Sources/app/flash_driver/flash_FTFL_c.obj" -c "$<" -MD -gccdep
 	@echo 'Finished building: $<'

@@ -45,3 +45,5 @@
 /* Use double buffered endpoints 5 & 6. To be only used with S08 cores */
 #define DOUBLE_BUFFERING_USED
 #endif
+
+#define BLUETOOTH_UART1

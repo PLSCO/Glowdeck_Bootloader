@@ -10,10 +10,12 @@ C_SRCS_QUOTED += \
 "$(APP)/msd_bootloader/FAT16.c" \
 "$(APP)/msd_bootloader/Loader.c" \
 "$(APP)/common/kinetis/RealTimerCounter_kinetis.c" \
+"$(APP)/msd_bootloader/bluetooth.c" \
 "$(APP)/msd_bootloader/disk.c" \
 "$(APP)/common/main_kinetis.c" \
 "$(APP)/common/kinetis/printf.c" \
 "$(APP)/common/kinetis/sci.c" \
+"$(APP)/common/serial/serial_kinetis.c" \
 "$(APP)/msd_bootloader/usb_descriptor.c" \
 "$(APP)/common/kinetis/vectors.c" \
 "$(APP)/common/kinetis/wdt_kinetis.c" \
@@ -23,10 +25,12 @@ $(APP)/msd_bootloader/Boot_loader_task.c \
 $(APP)/msd_bootloader/FAT16.c \
 $(APP)/msd_bootloader/Loader.c \
 $(APP)/common/kinetis/RealTimerCounter_kinetis.c \
+$(APP)/msd_bootloader/bluetooth.c \
 $(APP)/msd_bootloader/disk.c \
 $(APP)/common/main_kinetis.c \
 $(APP)/common/kinetis/printf.c \
 $(APP)/common/kinetis/sci.c \
+$(APP)/common/serial/serial_kinetis.c \
 $(APP)/msd_bootloader/usb_descriptor.c \
 $(APP)/common/kinetis/vectors.c \
 $(APP)/common/kinetis/wdt_kinetis.c \
@@ -36,10 +40,12 @@ OBJS += \
 ./Sources/app/FAT16_c.obj \
 ./Sources/app/Loader_c.obj \
 ./Sources/app/RealTimerCounter_kinetis_c.obj \
+./Sources/app/bluetooth_c.obj \
 ./Sources/app/disk_c.obj \
 ./Sources/app/main_kinetis_c.obj \
 ./Sources/app/printf_c.obj \
 ./Sources/app/sci_c.obj \
+./Sources/app/serial_kinetis_c.obj \
 ./Sources/app/usb_descriptor_c.obj \
 ./Sources/app/vectors_c.obj \
 ./Sources/app/wdt_kinetis_c.obj \
@@ -49,10 +55,12 @@ OBJS_QUOTED += \
 "./Sources/app/FAT16_c.obj" \
 "./Sources/app/Loader_c.obj" \
 "./Sources/app/RealTimerCounter_kinetis_c.obj" \
+"./Sources/app/bluetooth_c.obj" \
 "./Sources/app/disk_c.obj" \
 "./Sources/app/main_kinetis_c.obj" \
 "./Sources/app/printf_c.obj" \
 "./Sources/app/sci_c.obj" \
+"./Sources/app/serial_kinetis_c.obj" \
 "./Sources/app/usb_descriptor_c.obj" \
 "./Sources/app/vectors_c.obj" \
 "./Sources/app/wdt_kinetis_c.obj" \
@@ -62,10 +70,12 @@ C_DEPS += \
 ./Sources/app/FAT16_c.d \
 ./Sources/app/Loader_c.d \
 ./Sources/app/RealTimerCounter_kinetis_c.d \
+./Sources/app/bluetooth_c.d \
 ./Sources/app/disk_c.d \
 ./Sources/app/main_kinetis_c.d \
 ./Sources/app/printf_c.d \
 ./Sources/app/sci_c.d \
+./Sources/app/serial_kinetis_c.d \
 ./Sources/app/usb_descriptor_c.d \
 ./Sources/app/vectors_c.d \
 ./Sources/app/wdt_kinetis_c.d \
@@ -75,10 +85,12 @@ C_DEPS_QUOTED += \
 "./Sources/app/FAT16_c.d" \
 "./Sources/app/Loader_c.d" \
 "./Sources/app/RealTimerCounter_kinetis_c.d" \
+"./Sources/app/bluetooth_c.d" \
 "./Sources/app/disk_c.d" \
 "./Sources/app/main_kinetis_c.d" \
 "./Sources/app/printf_c.d" \
 "./Sources/app/sci_c.d" \
+"./Sources/app/serial_kinetis_c.d" \
 "./Sources/app/usb_descriptor_c.d" \
 "./Sources/app/vectors_c.d" \
 "./Sources/app/wdt_kinetis_c.d" \
@@ -88,10 +100,12 @@ OBJS_OS_FORMAT += \
 ./Sources/app/FAT16_c.obj \
 ./Sources/app/Loader_c.obj \
 ./Sources/app/RealTimerCounter_kinetis_c.obj \
+./Sources/app/bluetooth_c.obj \
 ./Sources/app/disk_c.obj \
 ./Sources/app/main_kinetis_c.obj \
 ./Sources/app/printf_c.obj \
 ./Sources/app/sci_c.obj \
+./Sources/app/serial_kinetis_c.obj \
 ./Sources/app/usb_descriptor_c.obj \
 ./Sources/app/vectors_c.obj \
 ./Sources/app/wdt_kinetis_c.obj \
@@ -150,9 +164,22 @@ Sources/app/RealTimerCounter_kinetis_c.d: $(APP)/common/kinetis/RealTimerCounter
 	
 	@echo ' '
 
-Sources/app/disk_c.obj: $(APP)/msd_bootloader/disk.c
+Sources/app/bluetooth_c.obj: $(APP)/msd_bootloader/bluetooth.c
 	@echo 'Building file: $<'
 	@echo 'Executing target #11 $<'
+	@echo 'Invoking: ARM Compiler'
+	"$(ARM_ToolsDirEnv)/mwccarm" -gccinc @@"Sources/app/bluetooth.args" -o "Sources/app/bluetooth_c.obj" -c "$<" -MD -gccdep
+	@echo 'Finished building: $<'
+	@echo ' '
+
+Sources/app/bluetooth_c.d: $(APP)/msd_bootloader/bluetooth.c
+	@echo 'Regenerating dependency file: $@'
+	
+	@echo ' '
+
+Sources/app/disk_c.obj: $(APP)/msd_bootloader/disk.c
+	@echo 'Building file: $<'
+	@echo 'Executing target #12 $<'
 	@echo 'Invoking: ARM Compiler'
 	"$(ARM_ToolsDirEnv)/mwccarm" -gccinc @@"Sources/app/disk.args" -o "Sources/app/disk_c.obj" -c "$<" -MD -gccdep
 	@echo 'Finished building: $<'
@@ -165,7 +192,7 @@ Sources/app/disk_c.d: $(APP)/msd_bootloader/disk.c
 
 Sources/app/main_kinetis_c.obj: $(APP)/common/main_kinetis.c
 	@echo 'Building file: $<'
-	@echo 'Executing target #12 $<'
+	@echo 'Executing target #13 $<'
 	@echo 'Invoking: ARM Compiler'
 	"$(ARM_ToolsDirEnv)/mwccarm" -gccinc @@"Sources/app/main_kinetis.args" -o "Sources/app/main_kinetis_c.obj" -c "$<" -MD -gccdep
 	@echo 'Finished building: $<'
@@ -178,7 +205,7 @@ Sources/app/main_kinetis_c.d: $(APP)/common/main_kinetis.c
 
 Sources/app/printf_c.obj: $(APP)/common/kinetis/printf.c
 	@echo 'Building file: $<'
-	@echo 'Executing target #13 $<'
+	@echo 'Executing target #14 $<'
 	@echo 'Invoking: ARM Compiler'
 	"$(ARM_ToolsDirEnv)/mwccarm" -gccinc @@"Sources/app/printf.args" -o "Sources/app/printf_c.obj" -c "$<" -MD -gccdep
 	@echo 'Finished building: $<'
@@ -191,7 +218,7 @@ Sources/app/printf_c.d: $(APP)/common/kinetis/printf.c
 
 Sources/app/sci_c.obj: $(APP)/common/kinetis/sci.c
 	@echo 'Building file: $<'
-	@echo 'Executing target #14 $<'
+	@echo 'Executing target #15 $<'
 	@echo 'Invoking: ARM Compiler'
 	"$(ARM_ToolsDirEnv)/mwccarm" -gccinc @@"Sources/app/sci.args" -o "Sources/app/sci_c.obj" -c "$<" -MD -gccdep
 	@echo 'Finished building: $<'
@@ -202,9 +229,22 @@ Sources/app/sci_c.d: $(APP)/common/kinetis/sci.c
 	
 	@echo ' '
 
+Sources/app/serial_kinetis_c.obj: $(APP)/common/serial/serial_kinetis.c
+	@echo 'Building file: $<'
+	@echo 'Executing target #16 $<'
+	@echo 'Invoking: ARM Compiler'
+	"$(ARM_ToolsDirEnv)/mwccarm" -gccinc @@"Sources/app/serial_kinetis.args" -o "Sources/app/serial_kinetis_c.obj" -c "$<" -MD -gccdep
+	@echo 'Finished building: $<'
+	@echo ' '
+
+Sources/app/serial_kinetis_c.d: $(APP)/common/serial/serial_kinetis.c
+	@echo 'Regenerating dependency file: $@'
+	
+	@echo ' '
+
 Sources/app/usb_descriptor_c.obj: $(APP)/msd_bootloader/usb_descriptor.c
 	@echo 'Building file: $<'
-	@echo 'Executing target #15 $<'
+	@echo 'Executing target #17 $<'
 	@echo 'Invoking: ARM Compiler'
 	"$(ARM_ToolsDirEnv)/mwccarm" -gccinc @@"Sources/app/usb_descriptor.args" -o "Sources/app/usb_descriptor_c.obj" -c "$<" -MD -gccdep
 	@echo 'Finished building: $<'
@@ -217,7 +257,7 @@ Sources/app/usb_descriptor_c.d: $(APP)/msd_bootloader/usb_descriptor.c
 
 Sources/app/vectors_c.obj: $(APP)/common/kinetis/vectors.c
 	@echo 'Building file: $<'
-	@echo 'Executing target #16 $<'
+	@echo 'Executing target #18 $<'
 	@echo 'Invoking: ARM Compiler'
 	"$(ARM_ToolsDirEnv)/mwccarm" -gccinc @@"Sources/app/vectors.args" -o "Sources/app/vectors_c.obj" -c "$<" -MD -gccdep
 	@echo 'Finished building: $<'
@@ -230,7 +270,7 @@ Sources/app/vectors_c.d: $(APP)/common/kinetis/vectors.c
 
 Sources/app/wdt_kinetis_c.obj: $(APP)/common/kinetis/wdt_kinetis.c
 	@echo 'Building file: $<'
-	@echo 'Executing target #17 $<'
+	@echo 'Executing target #19 $<'
 	@echo 'Invoking: ARM Compiler'
 	"$(ARM_ToolsDirEnv)/mwccarm" -gccinc @@"Sources/app/wdt_kinetis.args" -o "Sources/app/wdt_kinetis_c.obj" -c "$<" -MD -gccdep
 	@echo 'Finished building: $<'

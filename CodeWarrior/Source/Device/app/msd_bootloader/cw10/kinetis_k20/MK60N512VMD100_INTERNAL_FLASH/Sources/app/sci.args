@@ -1,0 +1,36 @@
+-proc cortex-m4
+-fp soft
+-little
+-msgstyle parseable
+-g3
+-thumb
+-interworking
+-lavender model=ewl ,print=int ,scan=int ,io=raw
+-cwd include
+-enc ascii
+-i
+"$(ProjDirPath)"
+-i
+"$(APP)/msd_bootloader"
+-i
+"$(APP)/msd_bootloader/flash_driver"
+-i
+"$(SOURCE)/driver"
+-i
+"$(KINETIS)"
+-i
+"$(SOURCE)/common"
+-i
+"$(SOURCE)/class"
+-i
+"$(APP)/common"
+-i
+"$(APP)/common/kinetis"
+-i
+"$(MCUToolsBaseDirEnv)/ARM_EABI_Support/ewl/EWL_C/include"
+-DLITTLE_ENDIAN
+-inline on
+-generic_symbol_names off
+-sdata 8
+-char signed
+-iso_templates on

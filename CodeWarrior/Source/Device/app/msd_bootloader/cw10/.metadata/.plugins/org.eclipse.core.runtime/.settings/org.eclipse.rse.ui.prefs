@@ -1,0 +1,2 @@
+eclipse.preferences.version=1
+org.eclipse.rse.preferences.order.connections=Io.Local;Io.kinetis_MK60N512VMD100_msd_bootloader INTERNAL_FLASH_P&E;Io.kinetis_MK60N512VMD100_msd_bootloader INTERNAL_FLASH_P&E Target

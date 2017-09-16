@@ -2,7 +2,7 @@
 # Automatically-generated file. Do not edit!
 ################################################################################
 
-#Progress monitor hint: 19
+#Progress monitor hint: 21
 first : all
 -include ../makefile.init
 
@@ -71,7 +71,7 @@ all: warning-messages explicit-dependencies kinetis_k20.afx
 # Tool invocations
 kinetis_k20.afx: $(OBJS) $(LCF_BUILD_DEPENCENCY) $(USER_OBJS) $(LCF_SRCS)
 	@echo 'Building target: $@'
-	@echo 'Executing target #20 $@'
+	@echo 'Executing target #22 $@'
 	@echo 'Invoking: ARM Linker'
 	"$(ARM_ToolsDirEnv)/mwldarm" -o "kinetis_k20.afx" @@"kinetis_k20.args"  $(USER_OBJS_QUOTED) $(LIBS_QUOTED)
 	@echo 'Finished building target: $@'

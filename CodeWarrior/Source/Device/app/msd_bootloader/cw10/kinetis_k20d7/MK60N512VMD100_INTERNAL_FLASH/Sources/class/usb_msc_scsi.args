@@ -29,6 +29,7 @@
 -i
 "$(MCUToolsBaseDirEnv)/ARM_EABI_Support/ewl/EWL_C/include"
 -DLITTLE_ENDIAN
+-opt space
 -inline on
 -generic_symbol_names off
 -sdata 8

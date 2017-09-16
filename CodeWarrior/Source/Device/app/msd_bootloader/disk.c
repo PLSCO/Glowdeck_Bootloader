@@ -19,8 +19,7 @@
 #include "Bootloader.h"
 #include "Boot_loader_task.h"
 
-int ALLDONE = 0;
-uint32_t ALLDONECOUNT = 0;
+extern int ALLDONE;
 
 #if (defined MCU_MK60N512VMD100) || (defined MCU_MK70F12) ||(defined MCU_MK20D7) 
 //#include "SD_kinetis.h" // in case an SD card wants to be used instead.
@@ -43,9 +42,10 @@ void            TestApp_Init(void);
 extern void     Watchdog_Reset(void);
 extern uint_8   filetype;             /* image file type */  
 uint_32         file_size;            /* bytes */ 
-uint_8          new_file;  
+uint_8          new_file = FALSE;  
 uint_8          error=FLASH_IMAGE_SUCCESS;
 boolean         boot_complete = FALSE; 
+
 /****************************************************************************
  * Global Variables
  ****************************************************************************/ 
@@ -77,6 +77,9 @@ void Disk_App(void);
 /*****************************************************************************
  * Local Variables 
  *****************************************************************************/
+
+
+
 /*****************************************************************************
  * Local Functions
  *****************************************************************************/
@@ -181,8 +184,9 @@ void MSD_Event_Callback
 {
 	/* Body */
 	PTR_LBA_APP_STRUCT lba_data_ptr;
-	uint_32 i;
+	uint_32 i; 
 	uint_32 count;
+	uint_32 file_name[4];
 	uint_8_ptr prevent_removal_ptr, load_eject_start_ptr;
 	PTR_DEVICE_LBA_INFO_STRUCT device_lba_info_ptr;
 	UNUSED (controller_ID);
@@ -209,12 +213,12 @@ void MSD_Event_Callback
 		/* copy data from USb buffer to Storage device 
             (Called before after recv_data on BULK OUT endpoints)*/
 		lba_data_ptr = (PTR_LBA_APP_STRUCT)val;
-		if((lba_data_ptr->offset>>9)== FATTable0Sec0) 
+		if(((lba_data_ptr->offset>>9)== FATTable0Sec0) && active_file == FALSE) // USB host is about to write to root directory
 		{   
 			/* write new file */
 			new_file = TRUE;
 		} /* EndIf */
-		if(((lba_data_ptr->offset>>9)== FATRootDirSec0)&&(new_file == TRUE)) 
+		if(((lba_data_ptr->offset>>9)== FATRootDirSec0)&&(new_file == TRUE)) // USB host is trying to write the directory entry
 		{
 			/* read file size of the file was received */
 			/* search for the file entry was received */
@@ -227,21 +231,34 @@ void MSD_Event_Callback
 				} /* EndIf */
 			} /* Endfor */
 			/* the file size field is offet 28 of file entry */
-#if (defined MCU_MK60N512VMD100) || (defined MCU_MK70F12)||(defined MCU_MK20D7)
+#if (defined MCU_MK60N512VMD100) || (defined MCU_MK70F12) || (defined MCU_MK20D7)
 			file_size = *(uint_32*)( lba_data_ptr->buff_ptr + i + 28);
+						
+			/* GLOWDECK.BIN encodes to: 0x574F4C47, 0x4B434544, 0x204E4942 */
+			/* only allow the file write *if* the name = GLOWDECK.BIN */
+//			if (       (*(uint_32*)( lba_data_ptr->buff_ptr + i +  0) == 0x574F4C47) 
+//					&& (*(uint_32*)( lba_data_ptr->buff_ptr + i +  4) == 0x4B434544)
+//					&& (*(uint_32*)( lba_data_ptr->buff_ptr + i +  8) == 0x204E4942)) {
+					active_file = TRUE;
+//			} else {
+//				active_file = FALSE;
+//			}
+		              			
 #else
 			file_size = BYTESWAP32(*(uint_32*)( lba_data_ptr->buff_ptr + i + 28));
 #endif
+								
 			new_file = FALSE;
+
 		} /* EndIf */
 		
-		if((lba_data_ptr->offset>>9)== FATDataSec0) 
+		if(((lba_data_ptr->offset>>9)== FATDataSec0) && active_file) 
 		{
 			erase_flash();
 			filetype = UNKNOWN; 
 		} /* EndIf */
 		 
-		if((lba_data_ptr->offset>>9)>= FATDataSec0) 
+		if(((lba_data_ptr->offset>>9)>= FATDataSec0)  && active_file)
 		{
 			//Sd_Prepare_Data(lba_data_ptr->buff_ptr);
 			SetOutput(BSP_LED3, TRUE);
@@ -253,7 +270,7 @@ void MSD_Event_Callback
 			SetOutput(BSP_LED3, FALSE);
 		} /* EndIf */
 		/* rest of file */ 
-		if(((lba_data_ptr->offset>>9) - FATDataSec0) == ((file_size -1)/512))
+		if((((lba_data_ptr->offset>>9) - FATDataSec0) == ((file_size -1)/512)) && active_file)
 		{
 
 //SD CARD CODE			
@@ -272,9 +289,9 @@ void MSD_Event_Callback
 //			BootloaderStatus = BootloaderSuccess;
 
 //ON MEMORY DISK			
-			boot_complete=TRUE;     //tranfer file done
+			boot_complete=TRUE;     //tranfer file done		// disconnects the USB device
 
-			if(BootloaderStatus == BootloaderReady)
+			if(BootloaderStatus == BootloaderReady)			// writes "SUCCESS.TXT" into the file system (never going to be seen here.)
 			{
 				BootloaderStatus = BootloaderSuccess;
 			}
@@ -364,11 +381,6 @@ void TestApp_Task(void)
 		Disk_App(); 
 	} /* EndIf */
 	
-	if(ALLDONE==1){
-		ALLDONECOUNT++;
-		if(ALLDONECOUNT>1100000ul) //about 3 seconds before auto disconnect
-			pixel(0);
-	}
 } /* EndBody */
 /******************************************************************************
  *  

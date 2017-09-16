@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section name="Workbench">
+	<section name="org.eclipse.cdt.debug.internal.ui.dialogs.FilteredGlobalsDialog">
+		<item value="true" key="ShowStatusLine"/>
+		<item value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;&#x0D;&#x0A;&lt;History AllGlobals=&quot;&amp;lt;?xml version=&amp;quot;1.0&amp;quot; encoding=&amp;quot;UTF-8&amp;quot; standalone=&amp;quot;no&amp;quot;?&amp;gt;&amp;#x0D;&amp;#x0A;&amp;lt;globalVariableList&amp;gt;&amp;#x0D;&amp;#x0A;&amp;lt;globalVariable name=&amp;quot;file_size&amp;quot; path=&amp;quot;&amp;quot;/&amp;gt;&amp;#x0D;&amp;#x0A;&amp;lt;globalVariable name=&amp;quot;new_file&amp;quot; path=&amp;quot;&amp;quot;/&amp;gt;&amp;#x0D;&amp;#x0A;&amp;lt;globalVariable name=&amp;quot;active_file&amp;quot; path=&amp;quot;&amp;quot;/&amp;gt;&amp;#x0D;&amp;#x0A;&amp;lt;globalVariable name=&amp;quot;tx_buffer&amp;quot; path=&amp;quot;C:\text\projects\glowdeck\USB_MSD_Device_bootloader_v1.0\USB_MSD_Device_bootloader_v1.0\Source\Device\app\msd_bootloader\bluetooth.c&amp;quot;/&amp;gt;&amp;#x0D;&amp;#x0A;&amp;lt;globalVariable name=&amp;quot;tx_buffer_head&amp;quot; path=&amp;quot;C:\text\projects\glowdeck\USB_MSD_Device_bootloader_v1.0\USB_MSD_Device_bootloader_v1.0\Source\Device\app\msd_bootloader\bluetooth.c&amp;quot;/&amp;gt;&amp;#x0D;&amp;#x0A;&amp;lt;globalVariable name=&amp;quot;tx_buffer_tail&amp;quot; path=&amp;quot;C:\text\projects\glowdeck\USB_MSD_Device_bootloader_v1.0\USB_MSD_Device_bootloader_v1.0\Source\Device\app\msd_bootloader\bluetooth.c&amp;quot;/&amp;gt;&amp;#x0D;&amp;#x0A;&amp;lt;globalVariable name=&amp;quot;rx_buffer&amp;quot; path=&amp;quot;C:\text\projects\glowdeck\USB_MSD_Device_bootloader_v1.0\USB_MSD_Device_bootloader_v1.0\Source\Device\app\msd_bootloader\bluetooth.c&amp;quot;/&amp;gt;&amp;#x0D;&amp;#x0A;&amp;lt;/globalVariableList&amp;gt;&amp;#x0D;&amp;#x0A;&quot;/&gt;" key="History"/>
+		<item value="false" key="ShowAdded"/>
+		<section name="DialogBoundsSettings">
+			<item value="600" key="DIALOG_WIDTH"/>
+			<item value="305" key="DIALOG_Y_ORIGIN"/>
+			<item value="500" key="DIALOG_HEIGHT"/>
+			<item value="1066" key="DIALOG_X_ORIGIN"/>
+			<item value="1|Segoe UI|9.0|0|WINDOWS|1|-12|0|0|0|400|0|0|0|1|0|0|0|0|Segoe UI" key="DIALOG_FONT_NAME"/>
+		</section>
+	</section>
+</section>

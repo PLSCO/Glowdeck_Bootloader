@@ -10,3 +10,6 @@ uint_8          erase_flash(void);
 void            Switch_mode(void); 
 void            SetOutput(uint_32 output,boolean state); 
 void            GPIO_Bootloader_Init(void);
+void 			pixel(uint8_t mode,uint32_t part,uint32_t full);
+
+extern boolean	active_file;

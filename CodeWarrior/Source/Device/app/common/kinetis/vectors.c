@@ -47,6 +47,14 @@ extern void IRQ_ISR_PORTE();
 extern void __thumb_startup( void );
 extern uint32_t __SP_INIT[];
 
+extern void uart1_status_isr(void);
+extern void uart1_error_isr(void);
+
+#ifdef BLUETOOTH_UART1
+	extern void bluetooth_status_isr(void);
+#endif
+
+
 #pragma define_section vectortable ".vectortable" ".vectortable" ".vectortable" far_abs R
 
 void Cpu_INT_NMIInterrupt(void)
@@ -222,7 +230,11 @@ static __declspec(vectortable) tVectorTable __vector_table = { /* Interrupt vect
 			(tIsrFunc)Cpu_Interrupt,				/* 0x3C  0x000000F0   -   ivINT_CAN1_Lost_Rx             unused by PE */
 			(tIsrFunc)Cpu_Interrupt,				/* 0x3D  0x000000F4   -   ivINT_UART0_RX_TX              unused by PE */
 			(tIsrFunc)Cpu_Interrupt,				/* 0x3E  0x000000F8   -   ivINT_UART0_ERR                unused by PE */
+#ifdef BLUETOOTH_UART1
+			(tIsrFunc)bluetooth_status_isr,			/* 0x3F  0x000000FC   -   ivINT_UART1_RX_TX              UART1 connected to BC127 (RM) */
+#else
 			(tIsrFunc)Cpu_Interrupt,				/* 0x3F  0x000000FC   -   ivINT_UART1_RX_TX              unused by PE */
+#endif		
 			(tIsrFunc)Cpu_Interrupt,				/* 0x40  0x00000100   -   ivINT_UART1_ERR                unused by PE */
 			(tIsrFunc)Cpu_Interrupt,				/* 0x41  0x00000104   -   ivINT_UART2_RX_TX              unused by PE */
 			(tIsrFunc)Cpu_Interrupt,				/* 0x42  0x00000108   -   ivINT_UART2_ERR                unused by PE */

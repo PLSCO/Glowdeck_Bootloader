@@ -81,6 +81,31 @@ void _Entry(void) ;
 
 #define  FLASH_IMAGE_SUCCESS    0
 #define  FLASH_IMAGE_ERROR      1
+#define FLASH_IMAGE_ERROR_S19_NOHEADER 0x32
+#define FLASH_IMAGE_ERROR_S19_FILE_INCOMPLETE 0x33
+#define FLASH_IMAGE_ERROR_S19_FILE_ENDED_EARLY 0x34
+#define FLASH_IMAGE_ERROR_S19_CHECKSUM_ERROR 0x35
+#define FLASH_IMAGE_ERROR_S19_FLASH_OK_FAIL 0x36
+#define FLASH_IMAGE_ERROR_S19_INVALID_ADDRESS 0x37
+#define FLASH_IMAGE_ERROR_BAD_PROGRAM 0x38
+	
+#define FLASH_IMAGE_ERROR_FRAME_TOO_LARGE 0xA1
+#define FLASH_IMAGE_ERROR_FRAME_NOT_DIVISIBLE_BY_FOUR 0xA2
+	
+	/** reproducing errors from flash_FTFL.h here for easy access **/
+	
+	/* error code, ORd together */
+	/*
+	#define Flash_OK                    0x00
+	#define Flash_FACCERR               0x01
+	#define Flash_FPVIOL                0x02
+	#define Flash_MGSTAT0               0x04
+	#define Flash_RDCOLERR              0x08
+	#define Flash_NOT_ERASED            0x10
+	#define Flash_CONTENTERR            0x11
+	
+	*/
+	
 
 #define BUFFER_LENGTH           (1024)    /* 1K bytes*/
 
